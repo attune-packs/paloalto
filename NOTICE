@@ -1,0 +1,15 @@
+This product includes a substantially modified adaptation of the StackStorm
+Exchange Palo Alto pack, version 1.0.0, originally attributed to Irek Romaniuk
+and John Anderson.
+
+Source: https://github.com/StackStorm-Exchange/stackstorm-paloalto
+Revision: efdc0db1dc96f94c4288a9c2ff227f2c9d0ee05e
+Revision date: 2021-12-19
+License: Apache License 2.0
+
+The action selection, implementation, API client, credential handling, Attune
+metadata, validation, tests, and documentation have been substantially changed.
+The upstream repository did not contain a NOTICE file at the verified revision.
+
+Palo Alto Networks, PAN-OS, and Panorama are trademarks of Palo Alto Networks,
+Inc. This attribution does not imply endorsement.

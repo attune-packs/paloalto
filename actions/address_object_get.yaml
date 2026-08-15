@@ -1,0 +1,26 @@
+ref: paloalto.address_object_get
+label: "Get Address Object"
+description: "Get one candidate-config address object from a firewall vsys or Panorama scope"
+enabled: true
+runner_type: python
+runtime_version: ">=3.10"
+entry_point: paloalto_action.py
+parameter_delivery: stdin
+parameter_format: json
+output_format: json
+default_execution_permission_set_refs: [standard]
+parameters:
+  credential_key: {type: string, default: paloalto.credentials, required: true, description: "Pack-owned encrypted Palo Alto credential Key ref"}
+  target_type: {type: string, enum: [firewall, panorama], required: true}
+  scope: {type: string, enum: [local, shared, device_group], required: true}
+  device_group: {type: string}
+  vsys: {type: string}
+  name: {type: string, required: true}
+  timeout_seconds: {type: integer, minimum: 1, maximum: 300, default: 30}
+output:
+  operation: {type: string}
+  target_type: {type: string}
+  changed: {type: any}
+  data: {type: any}
+  meta: {type: object}
+tags: [paloalto, address, get]

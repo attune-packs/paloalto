@@ -1,0 +1,29 @@
+ref: paloalto.commit_all
+label: "Panorama Commit-All Device Group"
+description: "Push shared policy for one Panorama device group, optionally limited to explicit serials"
+enabled: true
+runner_type: python
+runtime_version: ">=3.10"
+entry_point: paloalto_action.py
+parameter_delivery: stdin
+parameter_format: json
+output_format: json
+default_execution_permission_set_refs: [standard]
+parameters:
+  credential_key: {type: string, default: paloalto.credentials, required: true}
+  target_type: {type: string, enum: [panorama], required: true}
+  device_group: {type: string, required: true}
+  managed_device_serials: {type: array, items: {type: string}, default: []}
+  confirm: {type: string, required: true, description: "Must be exactly COMMIT-ALL"}
+  comment: {type: string}
+  wait: {type: boolean, default: true}
+  poll_interval_seconds: {type: integer, minimum: 1, maximum: 30, default: 2}
+  max_polls: {type: integer, minimum: 1, maximum: 120, default: 60}
+  timeout_seconds: {type: integer, minimum: 1, maximum: 300, default: 30}
+output:
+  operation: {type: string}
+  target_type: {type: string}
+  changed: {type: any}
+  data: {type: any}
+  meta: {type: object}
+tags: [paloalto, panorama, commit-all]
