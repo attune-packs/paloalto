@@ -86,7 +86,7 @@ class MetadataTests(unittest.TestCase):
                 for field, value in expected.items():
                     self.assertRegex(text, rf"(?m)^{field}: {re.escape(value)}$")
                 self.assertIn("default_execution_permission_set_refs: [standard]", text)
-                self.assertRegex(text, r"credential_key: \{[^\n]*default: paloalto\.credentials[^\n]*\}")
+                self.assertRegex(text, r"credential_key: \{[^\n]*default: pack\.paloalto\.credentials[^\n]*\}")
                 self.assertRegex(text, r"target_type: \{[^\n]*required: true")
                 for field in ("operation", "target_type", "changed", "data", "meta"):
                     self.assertRegex(text, rf"(?m)^  {field}: \{{type:")
@@ -392,10 +392,13 @@ class CredentialKeyAndEntryPointTests(unittest.TestCase):
             "attune.api_client.api.secrets": fake_secrets,
         }
         with mock.patch.dict(sys.modules, modules):
-            self.assertEqual("firewall", client._fetch_key("paloalto.credentials")["target_type"])
+            self.assertEqual("firewall", client._fetch_key("pack.paloalto.credentials")["target_type"])
+        fake_secrets.get_key.sync_detailed.assert_called_once_with(
+            "pack.paloalto.credentials", client=fake_attune.context.client
+        )
         fake_secrets.get_key.sync_detailed.side_effect = RuntimeError("secret")
         with mock.patch.dict(sys.modules, modules), self.assertRaises(client.PanosPackError) as caught:
-            client._fetch_key("paloalto.credentials")
+            client._fetch_key("pack.paloalto.credentials")
         self.assertNotIn("secret", str(caught.exception))
 
     def test_entrypoint_rejects_non_object_and_redacts_unknown_errors(self):

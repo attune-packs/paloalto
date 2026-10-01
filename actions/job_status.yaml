@@ -10,7 +10,7 @@ parameter_format: json
 output_format: json
 default_execution_permission_set_refs: [standard]
 parameters:
-  credential_key: {type: string, default: paloalto.credentials, required: true}
+  credential_key: {type: string, default: pack.paloalto.credentials, required: true}
   target_type: {type: string, enum: [firewall, panorama], required: true}
   job_id: {type: string, required: true}
   timeout_seconds: {type: integer, minimum: 1, maximum: 300, default: 30}

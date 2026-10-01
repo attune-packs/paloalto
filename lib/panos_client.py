@@ -13,7 +13,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from typing import Any
 
-DEFAULT_CREDENTIAL_KEY = "paloalto.credentials"
+DEFAULT_CREDENTIAL_KEY = "pack.paloalto.credentials"
 MAX_RESPONSE_BYTES = 8 * 1024 * 1024
 MAX_ITEMS = 1000
 _SAFE_NAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_. -]{0,62}$")
@@ -44,7 +44,7 @@ def _fetch_key(key_ref: str) -> dict[str, Any]:
         import attune
         from attune.api_client.api.secrets import get_key
 
-        response = get_key.sync_detailed(client=attune.context.client, key_ref=key_ref)
+        response = get_key.sync_detailed(key_ref, client=attune.context.client)
     except Exception as exc:  # noqa: BLE001
         raise PanosPackError(f"could not read Palo Alto credential Key ({type(exc).__name__})") from None
     if response.status_code != 200 or response.parsed is None:

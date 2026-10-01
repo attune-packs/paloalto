@@ -10,7 +10,7 @@ parameter_format: json
 output_format: json
 default_execution_permission_set_refs: [standard]
 parameters:
-  credential_key: {type: string, default: paloalto.credentials, required: true}
+  credential_key: {type: string, default: pack.paloalto.credentials, required: true}
   target_type: {type: string, enum: [firewall, panorama], required: true}
   confirm: {type: string, required: true, description: "Must be exactly COMMIT"}
   comment: {type: string}

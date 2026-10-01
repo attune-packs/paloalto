@@ -13,7 +13,7 @@ documentation and the Palo Alto-maintained `pan-os-python` v1.13.1 client. See
 
 - Python 3.10 or newer on the selected Attune worker.
 - HTTPS reachability from the worker to a firewall or Panorama management API.
-- A pack-owned encrypted Attune Key, normally `paloalto.credentials`.
+- A pack-owned encrypted Attune Key, normally `pack.paloalto.credentials`.
 - A least-privilege PAN-OS XML API administrator role for the selected actions.
 - A trusted appliance certificate or the issuing CA certificate in the Key.
 
